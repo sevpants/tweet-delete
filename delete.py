@@ -1,5 +1,6 @@
 import yaml
 import twitter
+from textblob import TextBlob
 
 
 # load in twitter sekrits
@@ -18,9 +19,22 @@ api = twitter.Api(
 
 print(api.VerifyCredentials())
 # search tweets
+statuses = api.GetUserTimeline()
+status_dict = {}
+
+# for status in statuses:
+#     if status.text
 
 
-# return le tweets
+print('retrieving all tweets ever posted')
+
+
+
+# run sentiment analysis
+
+
+# remove negative tweets
+
 
 # delete le tweets
 
