@@ -25,7 +25,10 @@ print(api.VerifyCredentials())
 
 # Search the last 200 tweets
 print('RETRIEVING ALL STATUSES EVER POSTED...UP TO 200 STATUSES')
+
 timeline = api.GetUserTimeline(count=200)
+
+print(len(timeline))
 
 
 # Export timeline to csv and use UTF-8 encoding to handle emojis in tweets
@@ -42,6 +45,7 @@ with open('tweets.csv', 'w', newline='', encoding='UTF-8') as csvfile:
                             'text'
                         ]
                     )
+    count = 0
     for status in timeline:
         status_writer.writerow(
                         [
@@ -52,18 +56,21 @@ with open('tweets.csv', 'w', newline='', encoding='UTF-8') as csvfile:
                             status.text
                         ]
                     )
+        count += 1
 
 print('CSV FILE GENERATED')
-    
+print(f'{count} rows added')    
 
 # for analysis of the timeline, please check out the python notebook in the root of the repo
 
 
 # delete all tweets
-# for status in timeline:
-#     f"Destroying status {status.id}"
-#     api.DestroyStatus(status.id)
-#     print("STATUS DESTROYED SUCCESSFULLY")
+count = 0
+for status in timeline:
+    print(f'Destroying status {status.id}')
+    api.DestroyStatus(status.id)
+    count += 1
+    print('STATUS DESTROYED SUCCESSFULLY')
 
 
-# print("The timeline has now been purged.")
+print(f'The timeline has now been purged of {count} statuses')
